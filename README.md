@@ -1,4 +1,6 @@
-Aviasales
+# Aviasales #
 
-npm i
-npm run dev
+Commands to run project:
+
+    npm i
+    npm run dev
