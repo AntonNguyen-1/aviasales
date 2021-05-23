@@ -1,5 +1,20 @@
 import React from "react";
+import Filters from "./Filters";
+import TicketList from "./TicketList";
+import AviasalesLogo from "../assets/logo.svg";
 
 export default function HomePage() {
-  return <div>home page</div>;
+  return (
+    <div>
+      <img
+        id="logo"
+        src={AviasalesLogo}
+        alt="logo.png"
+        width="75"
+        height="75"
+      />
+      <Filters />
+      <TicketList />
+    </div>
+  );
 }

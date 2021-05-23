@@ -1,5 +1,12 @@
 import React from "react";
+import ConnectionFilter from "./ConnectionFilter";
+import CurrencyFilter from "./CurrencyFilter";
 
 export default function Filters() {
-  return <div></div>;
+  return (
+    <div>
+      <CurrencyFilter />
+      <ConnectionFilter />
+    </div>
+  );
 }
