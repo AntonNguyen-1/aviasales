@@ -1,0 +1,28 @@
+.currency-btn {
+  width: 65px;
+  height: 35px;
+  font-weight: 400;
+  border: 1px solid #b4b4b4;
+  background-color: #ffffff;
+  color: #357cff;
+  margin-left: -1px;
+  &:hover {
+    background-color: #e4eeff;
+    cursor: pointer;
+  }
+  &.selected {
+    cursor: auto;
+    color: #ffffff;
+    background-color: #357cff;
+    border-color: #357cff;
+  }
+}
+.currency-btn:first-child {
+  margin-left: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.currency-btn:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

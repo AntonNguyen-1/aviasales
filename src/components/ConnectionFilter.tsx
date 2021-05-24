@@ -37,6 +37,7 @@ export default function ConnectionFilter() {
 
   return (
     <div className="connection-filter-container">
+      <h3 className="connection-filter-title">Количество пересадок</h3>
       <CheckboxWithLabel
         onChange={setAll}
         name="all"
