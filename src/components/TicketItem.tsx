@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Ticket } from "../redux/ticket/types/types";
 import { Currency } from "../redux/currency/types/types";
+import ModalBuyWindow from "./ModalBuyWindow";
 
 interface TicketItemProps {
   ticket: Ticket;
@@ -11,6 +12,7 @@ export default function TicketItem({
   ticket,
   currentCurrency,
 }: TicketItemProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const changeWordEnding = (stops: number) => {
     switch (stops) {
       case 1: {
@@ -43,15 +45,20 @@ export default function TicketItem({
     }
   };
 
+  const handleOnClick = () => {
+    setIsModalOpen((prevState) => !prevState);
+  };
+
   return (
     <li className="ticket-list-item">
+      {isModalOpen && <ModalBuyWindow handleOnClick={handleOnClick} />}
       <div className="layout-position">
         <img
           className="airline-logo"
           src="/src/assets/turkish-airline-logo.png"
           alt="turkish-airline-logo"
         />
-        <button className="btn btn-buy">
+        <button onClick={() => handleOnClick()} className="btn btn-buy">
           Купить за {ticket.price + currencyIcon(currentCurrency)}
         </button>
       </div>
