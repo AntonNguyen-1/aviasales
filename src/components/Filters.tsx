@@ -5,7 +5,7 @@ import "./Filters.style.scss";
 
 export default function Filters() {
   return (
-    <div>
+    <div className="filters-wrapper">
       <CurrencyFilter />
       <StopsFilter />
     </div>

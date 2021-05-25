@@ -6,7 +6,7 @@ import "./HomePage.style.scss";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="home-page">
       <img
         id="logo"
         src={AviasalesLogo}
