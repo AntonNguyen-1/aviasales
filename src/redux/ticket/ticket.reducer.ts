@@ -13,6 +13,9 @@ export function ticketReducer(state = defaultState, action: TicketAction) {
     case TicketActionType.ADD_ITEMS: {
       return state.concat(action.payload);
     }
+    case TicketActionType.UPDATE_ITEMS: {
+      return action.payload;
+    }
     default: {
       return state;
     }

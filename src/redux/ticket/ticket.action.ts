@@ -7,3 +7,10 @@ export function addItems(items: Ticket[]) {
     payload: items,
   };
 }
+
+export function updateItems(items: Ticket[]) {
+  return {
+    type: TicketActionType.UPDATE_ITEMS,
+    payload: items,
+  };
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Ticket } from "../redux/ticket/types/types";
+import { Ticket, Currency } from "../redux/ticket/types/types";
 
 interface TicketItemProps {
   ticket: Ticket;
@@ -21,6 +21,23 @@ export default function TicketItem({ ticket }: TicketItemProps) {
     }
   };
 
+  const currencyIcon = (currency = Currency.RUB) => {
+    switch (currency) {
+      case Currency.RUB: {
+        return "\u20BD";
+      }
+      case Currency.USD: {
+        return "\u0024";
+      }
+      case Currency.EUR: {
+        return "\u20AC";
+      }
+      default: {
+        return "";
+      }
+    }
+  };
+
   return (
     <li className="ticket-list-item">
       <div className="layout-position">
@@ -29,7 +46,9 @@ export default function TicketItem({ ticket }: TicketItemProps) {
           src="/src/assets/turkish-airline-logo.png"
           alt="turkish-airline-logo"
         />
-        <button className="btn btn-buy">Купить за {ticket.price}</button>
+        <button className="btn btn-buy">
+          Купить за {ticket.price + currencyIcon(ticket.currentCurrency)}
+        </button>
       </div>
       <div className="layout-position">
         <div className="dp-country-info">

@@ -15,9 +15,11 @@ export default function TicketList() {
 
   return (
     <ul className="ticket-list">
-      {tickets.map((ticket) => (
-        <TicketItem key={ticket.id} ticket={ticket} />
-      ))}
+      {tickets
+        .sort((a, b) => b.price - a.price)
+        .map((ticket) => (
+          <TicketItem key={ticket.id} ticket={ticket} />
+        ))}
     </ul>
   );
 }
