@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Currency } from "../redux/ticket/types/types";
-import { updateTicketsPriceByCurrency } from "../redux/ticket/ticket.api";
-import "./CurrencyFilter.style.scss";
+import { Currency } from "../redux/currency/types/types";
 import { RootState } from "../redux/store";
+import { fetchCurrencyRates } from "../redux/currency/currency.api";
+import "./CurrencyFilter.style.scss";
 
 export default function CurrencyFilter() {
   const dispatch = useDispatch();
-  const tickets = useSelector((state: RootState) => state.ticket);
-  const [selectedCurrency, setSelectedCurrency] = useState<Currency>(
-    Currency.RUB
+  const currency = useSelector(
+    (state: RootState) => state.currency.currentCurrency
   );
 
   const handleOnClick = (currency: Currency) => {
-    setSelectedCurrency(currency);
-    dispatch(updateTicketsPriceByCurrency(currency, tickets));
+    dispatch(fetchCurrencyRates(currency));
   };
 
   return (
@@ -24,27 +22,27 @@ export default function CurrencyFilter() {
         <button
           onClick={() => handleOnClick(Currency.RUB)}
           className={`${
-            selectedCurrency === Currency.RUB ? "selected " : ""
+            currency === Currency.RUB ? "selected " : ""
           }currency-btn`}
-          disabled={selectedCurrency === Currency.RUB}
+          disabled={currency === Currency.RUB}
         >
           RUB
         </button>
         <button
           onClick={() => handleOnClick(Currency.USD)}
           className={`${
-            selectedCurrency === Currency.USD ? "selected " : ""
+            currency === Currency.USD ? "selected " : ""
           }currency-btn`}
-          disabled={selectedCurrency === Currency.USD}
+          disabled={currency === Currency.USD}
         >
           USD
         </button>
         <button
           onClick={() => handleOnClick(Currency.EUR)}
           className={`${
-            selectedCurrency === Currency.EUR ? "selected " : ""
+            currency === Currency.EUR ? "selected " : ""
           }currency-btn`}
-          disabled={selectedCurrency === Currency.EUR}
+          disabled={currency === Currency.EUR}
         >
           EUR
         </button>

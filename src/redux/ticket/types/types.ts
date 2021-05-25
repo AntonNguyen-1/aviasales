@@ -11,25 +11,11 @@ export interface Ticket {
   carrier: string;
   stops: number;
   price: number;
-  currentCurrency?: Currency;
-}
-
-export enum Currency {
-  RUB = "RUB",
-  USD = "USD",
-  EUR = "EUR",
 }
 
 export interface RatesError {
   result: string;
   "error-type": string;
-}
-
-export interface StopsFilters {
-  "non-stop": boolean;
-  "one-transfer": boolean;
-  "two-transfers": boolean;
-  "three-transfers": boolean;
 }
 
 export interface RatesData {

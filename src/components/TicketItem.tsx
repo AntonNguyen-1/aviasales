@@ -1,11 +1,16 @@
-import React from "react";
-import { Ticket, Currency } from "../redux/ticket/types/types";
+import React, { useState } from "react";
+import { Ticket } from "../redux/ticket/types/types";
+import { Currency } from "../redux/currency/types/types";
 
 interface TicketItemProps {
   ticket: Ticket;
+  currentCurrency: Currency;
 }
 
-export default function TicketItem({ ticket }: TicketItemProps) {
+export default function TicketItem({
+  ticket,
+  currentCurrency,
+}: TicketItemProps) {
   const changeWordEnding = (stops: number) => {
     switch (stops) {
       case 1: {
@@ -46,8 +51,8 @@ export default function TicketItem({ ticket }: TicketItemProps) {
           src="/src/assets/turkish-airline-logo.png"
           alt="turkish-airline-logo"
         />
-        <button className="btn btn-buy">
-          Купить за {ticket.price + currencyIcon(ticket.currentCurrency)}
+        <button onClick={() => handleOnClick()} className="btn btn-buy">
+          Купить за {ticket.price + currencyIcon(currentCurrency)}
         </button>
       </div>
       <div className="layout-position">

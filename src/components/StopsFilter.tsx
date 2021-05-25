@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchTicketsByFilters } from "../redux/ticket/ticket.api";
+import { updateSelectedStopsFilters } from "../redux/stopsFilter/stopsFilter.action";
+import { StopsFilters } from "../redux/stopsFilter/types/types";
 import CheckboxWithLabel from "./CheckboxWithLabel";
 
 const initialState = {
@@ -16,16 +17,42 @@ export default function StopsFilter() {
 
   const isCheckedAll = Object.values(selectedBoxes).every((name) => name);
 
-  const setCheckboxOption = (option: keyof typeof selectedBoxes) => {
+  const modifySelectedBoxes = (option: keyof typeof selectedBoxes) => {
+    const filters = { ...selectedBoxes, [option]: !selectedBoxes[option] };
+    const selectedStops = Object.keys(filters)
+      .map((f) => {
+        if (!filters[f as keyof StopsFilters]) return -1;
+        switch (f) {
+          case "non-stop": {
+            return 0;
+          }
+          case "one-transfer": {
+            return 1;
+          }
+          case "two-transfers": {
+            return 2;
+          }
+          case "three-transfers": {
+            return 3;
+          }
+          default: {
+            return -1;
+          }
+        }
+      })
+      .filter((s) => s >= 0);
+    if (!selectedStops.length) {
+      return selectedStops.concat([0, 1, 2, 3]);
+    }
+    return selectedStops;
+  };
+
+  const handleOnChange = (option: keyof typeof selectedBoxes) => {
     setSelectedBoxes((prevState) => {
       return { ...prevState, [option]: !prevState[option] };
     });
-    dispatch(
-      fetchTicketsByFilters({
-        ...selectedBoxes,
-        [option]: !selectedBoxes[option],
-      })
-    );
+    const selectedStops = modifySelectedBoxes(option);
+    dispatch(updateSelectedStopsFilters(selectedStops));
   };
 
   const setAll = () => {
@@ -37,7 +64,7 @@ export default function StopsFilter() {
           return { ...acc, [currKey]: true };
         }, prevState)
       );
-      dispatch(fetchTicketsByFilters(initialState));
+      dispatch(updateSelectedStopsFilters([0, 1, 2, 3]));
     }
   };
 
@@ -56,28 +83,28 @@ export default function StopsFilter() {
         checked={isCheckedAll}
       />
       <CheckboxWithLabel
-        onChange={() => setCheckboxOption("non-stop")}
+        onChange={() => handleOnChange("non-stop")}
         name="non-stop"
         id="checkbox-non-stop"
         labelText="Без пересадок"
         checked={isChecked("non-stop")}
       />
       <CheckboxWithLabel
-        onChange={() => setCheckboxOption("one-transfer")}
+        onChange={() => handleOnChange("one-transfer")}
         name="one-transfer"
         id="checkbox-one"
         labelText="1 пересадка"
         checked={isChecked("one-transfer")}
       />
       <CheckboxWithLabel
-        onChange={() => setCheckboxOption("two-transfers")}
+        onChange={() => handleOnChange("two-transfers")}
         name="two-transfers"
         id="checkbox-two"
         labelText="2 пересадки"
         checked={isChecked("two-transfers")}
       />
       <CheckboxWithLabel
-        onChange={() => setCheckboxOption("three-transfers")}
+        onChange={() => handleOnChange("three-transfers")}
         name="three-transfers"
         id="checkbox-three"
         labelText="3 пересадки"
