@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchTicketsByFilters } from "../redux/ticket/ticket.api";
 import CheckboxWithLabel from "./CheckboxWithLabel";
 
 const initialState = {
   "non-stop": false,
   "one-transfer": false,
-  "two-transfer": false,
-  "three-transfer": false,
+  "two-transfers": false,
+  "three-transfers": false,
 };
 
-export default function ConnectionFilter() {
+export default function StopsFilter() {
+  const dispatch = useDispatch();
   const [selectedBoxes, setSelectedBoxes] = useState(initialState);
 
   const isCheckedAll = Object.values(selectedBoxes).every((name) => name);
@@ -17,6 +20,12 @@ export default function ConnectionFilter() {
     setSelectedBoxes((prevState) => {
       return { ...prevState, [option]: !prevState[option] };
     });
+    dispatch(
+      fetchTicketsByFilters({
+        ...selectedBoxes,
+        [option]: !selectedBoxes[option],
+      })
+    );
   };
 
   const setAll = () => {
@@ -28,6 +37,7 @@ export default function ConnectionFilter() {
           return { ...acc, [currKey]: true };
         }, prevState)
       );
+      dispatch(fetchTicketsByFilters(initialState));
     }
   };
 
@@ -36,8 +46,8 @@ export default function ConnectionFilter() {
   };
 
   return (
-    <div className="connection-filter-container">
-      <h3 className="connection-filter-title">Количество пересадок</h3>
+    <div className="stops-filter-container">
+      <h3 className="stops-filter-title">Количество пересадок</h3>
       <CheckboxWithLabel
         onChange={setAll}
         name="all"
@@ -60,18 +70,18 @@ export default function ConnectionFilter() {
         checked={isChecked("one-transfer")}
       />
       <CheckboxWithLabel
-        onChange={() => setCheckboxOption("two-transfer")}
-        name="two-transfer"
+        onChange={() => setCheckboxOption("two-transfers")}
+        name="two-transfers"
         id="checkbox-two"
         labelText="2 пересадки"
-        checked={isChecked("two-transfer")}
+        checked={isChecked("two-transfers")}
       />
       <CheckboxWithLabel
-        onChange={() => setCheckboxOption("three-transfer")}
-        name="three-transfer"
+        onChange={() => setCheckboxOption("three-transfers")}
+        name="three-transfers"
         id="checkbox-three"
         labelText="3 пересадки"
-        checked={isChecked("three-transfer")}
+        checked={isChecked("three-transfers")}
       />
     </div>
   );
