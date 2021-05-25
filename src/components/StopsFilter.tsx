@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateSelectedStopsFilters } from "../redux/stopsFilter/stopsFilter.action";
 import { StopsFilters } from "../redux/stopsFilter/types/types";
 import CheckboxWithLabel from "./CheckboxWithLabel";
+import "./StopsFilter.style.scss";
 
 const initialState = {
   "non-stop": false,

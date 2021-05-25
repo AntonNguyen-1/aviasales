@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ModalSuccess from "./ModalSuccess";
+import "./ModalBuyWindow.style.scss";
 
 interface ModalBuyWindowProps {
   handleOnClick: () => void;

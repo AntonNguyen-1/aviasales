@@ -1,4 +1,5 @@
 import React from "react";
+import "./CheckboxWithLabel.style.scss";
 
 interface CheckboxWithLabelProps {
   onChange: () => void;

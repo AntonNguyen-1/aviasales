@@ -1,4 +1,5 @@
 import React from "react";
+import "./ModalSuccess.style.scss";
 
 interface ModalSuccessProps {
   handleOnClick: () => void;

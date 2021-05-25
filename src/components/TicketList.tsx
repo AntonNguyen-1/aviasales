@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { fetchTickets } from "../redux/ticket/ticket.api";
 import TicketItem from "./TicketItem";
+import "./TicketList.style.scss";
 
 export default function TicketList() {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Ticket } from "../redux/ticket/types/types";
 import { Currency } from "../redux/currency/types/types";
 import ModalBuyWindow from "./ModalBuyWindow";
-
+import "./TicketItem.style.scss";
 interface TicketItemProps {
   ticket: Ticket;
   currentCurrency: Currency;
