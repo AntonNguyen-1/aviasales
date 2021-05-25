@@ -51,7 +51,7 @@ export default function TicketItem({
           src="/src/assets/turkish-airline-logo.png"
           alt="turkish-airline-logo"
         />
-        <button onClick={() => handleOnClick()} className="btn btn-buy">
+        <button className="btn btn-buy">
           Купить за {ticket.price + currencyIcon(currentCurrency)}
         </button>
       </div>
